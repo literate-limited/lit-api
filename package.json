@@ -1,0 +1,39 @@
+{
+  "name": "lit-mvp-api",
+  "version": "1.0.0",
+  "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node test/integration/runner.js",
+    "test:core": "node test/integration/full-flow.test.js",
+    "test:curriculum": "node test/experimental/test-curriculum.js",
+    "test:security": "node test/integration/security.test.js",
+    "test:errors": "node test/integration/error-handling.test.js",
+    "test:comprehensive": "node test/integration/comprehensive.test.js"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.985.0",
+    "@aws-sdk/s3-request-presigner": "^3.985.0",
+    "bcrypt": "^5.1.1",
+    "cheerio": "^1.0.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "fluent-ffmpeg": "^2.1.3",
+    "jsonwebtoken": "^9.0.3",
+    "multer": "^2.0.2",
+    "openai": "^4.24.0",
+    "pg": "^8.13.1",
+    "socket.io": "^4.6.1",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "node-fetch": "^3.3.2",
+    "socket.io-client": "^4.8.3"
+  }
+}
