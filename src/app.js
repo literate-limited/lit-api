@@ -12,6 +12,7 @@ const { brandResolverMiddleware } = require('./middleware/brandResolver');
 const { errorHandler, notFoundHandler } = require('./middleware/errorHandler');
 const { createAuthRoutes } = require('./routes/v2/auth.routes');
 const { createUserRoutes } = require('./routes/v2/user.routes');
+const ssoRoutes = require('./routes/sso');
 
 /**
  * Create and configure Express app
@@ -117,6 +118,9 @@ function createApp(services, controllers) {
   /**
    * API Routes (v2)
    */
+
+  // SSO routes (seamless cross-brand authentication)
+  app.use('/api/sso', ssoRoutes);
 
   // Auth routes (public and protected)
   app.use('/api/v2/auth', createAuthRoutes(controllers.auth));
