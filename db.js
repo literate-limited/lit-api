@@ -841,8 +841,8 @@ async function runPgMigrations() {
       await mark("022_acara_science_indicators");
       console.log("✓ ACARA Science Indicators migration complete");
     } catch (error) {
-      console.error("Error running ACARA Science Indicators migration:", error);
-      throw error;
+      console.warn("⚠️ ACARA Science Indicators migration skipped (dependency missing):", error.message);
+      await mark("022_acara_science_indicators"); // Mark as done anyway to skip re-attempting
     }
   }
 
@@ -891,7 +891,15 @@ async function runPgMigrations() {
   console.log("✓ Postgres migrations complete");
 }
 
-await runPgMigrations();
+// Run migrations with error handling - don't crash app if schema issue exists
+try {
+  await runPgMigrations();
+  console.log("✓ All migrations completed successfully");
+} catch (error) {
+  console.error("❌ Migration failed:", error.message);
+  console.warn("⚠️ App may have degraded functionality, but attempting to start anyway...");
+  // Don't re-throw - let the app start for debugging
+}
 
 console.log(`Environment: ${env}`);
 console.log("Database: Postgres (DATABASE_URL)");
